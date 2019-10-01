@@ -4,10 +4,11 @@ services:
     tiltscanner:
         image: andylytical/tiltscanner:20190923
         environment:
-            PYTILT_CSVOUTFILE:
+            PYTILT_CSVOUTFILE: /tiltdata/${BEERNAME}.csv
             PYTILT_SAMPLE_PERIOD:
             PYTILT_SAMPLE_RATE:
             PYTILT_COLOR:
+        network_mode: host
         volumes:
             - ${HOME}/tiltdata:/tiltdata
 
