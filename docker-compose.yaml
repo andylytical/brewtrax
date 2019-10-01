@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+    tiltscanner:
+        image: andylytical/tiltscanner:20190923
+        environment:
+            PYTILT_CSVOUTFILE:
+            PYTILT_SAMPLE_PERIOD:
+            PYTILT_SAMPLE_RATE:
+            PYTILT_COLOR:
+        volumes:
+            - ${HOME}/tiltdata:/tiltdata
+
+#    cloudsync:
+#        image: andylytical/csv2gsheets:20190923
+#        environment:
+#            - GOOGLE_AUTH_CLIENT_SECRETS_FILE
+#            - GOOGLE_AUTH_CREDENTIALS_FILE
+#            - GOOGLE_DRIVE_FOLDER_ID
+#            - GOOGLE_SHEETS_SHEET_NAME
+#            - CLOUD_BACKUP_INTERVAL_SECONDS
+#        volumes:
+#            - ${HOME}/tiltdata:/tiltdata:ro
