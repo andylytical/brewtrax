@@ -2,9 +2,9 @@ version: '3.7'
 
 services:
     tiltscanner:
-        image: andylytical/tiltscanner:20190923
+        image: andylytical/tiltscanner:20191007-38b6498
         environment:
-            PYTILT_CSVOUTFILE: /tiltdata/${BEERNAME}.csv
+            PYTILT_CSVOUTFILE: ${CSV_BASEDIR:-.}/${BEERNAME:-tiltdata}.csv
             PYTILT_SAMPLE_PERIOD:
             PYTILT_SAMPLE_RATE:
             PYTILT_COLOR:
