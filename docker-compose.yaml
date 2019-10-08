@@ -8,6 +8,7 @@ services:
             PYTILT_SAMPLE_PERIOD:
             PYTILT_SAMPLE_RATE:
             PYTILT_COLOR:
+            PYTHONUNBUFFERED:
         network_mode: host
         volumes:
             - ${HOME}/tiltdata:/tiltdata
