@@ -4,22 +4,25 @@ services:
     tiltscanner:
         image: andylytical/tiltscanner:20191007-38b6498
         environment:
+            PYTHONUNBUFFERED:
+            PYTILT_COLOR:
             PYTILT_CSVOUTFILE: ${CSV_BASEDIR:-.}/${BEERNAME:-tiltdata}.csv
             PYTILT_SAMPLE_PERIOD:
             PYTILT_SAMPLE_RATE:
-            PYTILT_COLOR:
-            PYTHONUNBUFFERED:
         network_mode: host
         volumes:
-            - ${HOME}/tiltdata:/tiltdata
+            - ${HOME}/${CSV_BASEDIR:-.}:/tiltdata
 
-#    cloudsync:
-#        image: andylytical/csv2gsheets:20190923
-#        environment:
-#            - GOOGLE_AUTH_CLIENT_SECRETS_FILE
-#            - GOOGLE_AUTH_CREDENTIALS_FILE
-#            - GOOGLE_DRIVE_FOLDER_ID
-#            - GOOGLE_SHEETS_SHEET_NAME
-#            - CLOUD_BACKUP_INTERVAL_SECONDS
-#        volumes:
-#            - ${HOME}/tiltdata:/tiltdata:ro
+    cloudsync:
+        image: andylytical/csv2gsheets:20191014-672e357
+        environment:
+            CLOUD_BACKUP_INTERVAL_SECONDS:
+            CSV2GSHEETS_INFILE: ${CSV_BASEDIR:-.}/${BEERNAME:-tiltdata}.csv
+            GOOGLE_AUTH_CLIENT_SECRETS_FILE: ${HOME}/${GOOGLE_AUTH_CLIENT_SECRETS_FILE}
+            GOOGLE_AUTH_CREDENTIALS_FILE: ${HOME}/${GOOGLE_AUTH_CREDENTIALS_FILE}
+            GOOGLE_DRIVE_FOLDER_ID:
+            GOOGLE_SHEETS_FILENAME: ${BEERNAME}
+            GOOGLE_SHEETS_SHEET_NAME:
+            PYTHONUNBUFFERED:
+        volumes:
+            - ${HOME}/${CSV_BASEDIR:-.}:/tiltdata:ro
